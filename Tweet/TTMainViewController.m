@@ -12,10 +12,11 @@
 #import "AppDelegate.h"
 #import "TTDetailTweetView.h"
 #import "TTWarningView.h"
+#import "TTWebViewController.h"
 
 static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 
-@interface TTMainViewController () <TTLoginViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, TWTRTweetViewDelegate>
+@interface TTMainViewController () <TTLoginViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, TWTRTweetViewDelegate, TTDetailTweetViewDelegate>
 @property (nonatomic, strong) TTLoginViewController *loginViewController;
 @property (nonatomic, strong) NSArray *tweets;
 @end
@@ -203,18 +204,27 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 
 - (void)tweetView:(TWTRTweetView *)tweetView didSelectTweet:(TWTRTweet *)tweet{
     TTDetailTweetView *detailView = [TTDetailTweetView createNewDetailTweetViewWithTweet:tweet];
+    detailView.delegate = self;
     [detailView loadViewAnimatedOnView:self.navigationController.view];
 }
 
-- (void)tweetView:(TWTRTweetView *)tweetView didTapURL:(NSURL *)url {
-    
-    // *or* Use a system webview
-    UIViewController *webViewController = [[UIViewController alloc] init];
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:webViewController.view.bounds];
-    [webView loadRequest:[NSURLRequest requestWithURL:url]];
-    webViewController.view = webView;
-    
+- (void)tweetView:(TWTRTweetView *)tweetView didTapURL:(NSURL *)url
+{
+    [self loadWebViewControllerWithURL:url];
+}
+
+- (void) loadWebViewControllerWithURL: (NSURL *) url
+{
+    TTWebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TTWebViewController"];
+    webViewController.url = url;
     [self.navigationController pushViewController:webViewController animated:YES];
+}
+
+# pragma mark TTDetailTweetViewDelegate methods
+
+- (void) didTapOnDetailTweetViewURL:(NSURL *)url
+{
+    [self loadWebViewControllerWithURL:url];
 }
 
 - (void)didReceiveMemoryWarning

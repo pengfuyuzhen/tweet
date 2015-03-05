@@ -8,7 +8,7 @@
 
 #import "TTDetailTweetView.h"
 
-@interface TTDetailTweetView()
+@interface TTDetailTweetView() <TWTRTweetViewDelegate>
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @property (nonatomic, strong) UIButton *doneButton;
 @end
@@ -17,12 +17,23 @@
 
 + (TTDetailTweetView *) createNewDetailTweetViewWithTweet:(TWTRTweet *)tweet
 {
-    // Tweet detail view
     TTDetailTweetView *view = [[TTDetailTweetView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    view.detailTweetView = [[TWTRTweetView alloc] initWithTweet:tweet style:TWTRTweetViewStyleRegular];
-    view.detailTweetView.layer.borderColor = [[UIColor clearColor]CGColor];
-    view.detailTweetView.center = view.center;
-    [view addSubview:view.detailTweetView];
+    
+    // Background view
+    UIView *backgroundView = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    backgroundView.backgroundColor = [UIColor clearColor];
+    
+    // Tap gesture recognizer
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:view action:@selector(handleTapGestureRecognizer:)];
+    [backgroundView addGestureRecognizer:tap];
+    view.tapGestureRecognizer = tap;
+    [view addSubview:backgroundView];
+    
+    // Tweet detail view
+    view.tweetView = [[TWTRTweetView alloc] initWithTweet:tweet style:TWTRTweetViewStyleRegular];
+    view.tweetView.layer.borderColor = [[UIColor clearColor]CGColor];
+    view.tweetView.center = view.center;
+    [view addSubview:view.tweetView];
     
     // Gradient view
     NSArray *colors = @[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6].CGColor,
@@ -44,6 +55,7 @@
     topGradientView.frame = topGradientLayer.frame;
     topGradientView.backgroundColor = [UIColor clearColor];
     [topGradientView.layer insertSublayer:topGradientLayer atIndex:0];
+    topGradientView.userInteractionEnabled = NO;
     [view addSubview:topGradientView];
     
     // Done button
@@ -60,11 +72,6 @@
     [view addSubview:doneButton];
     view.doneButton = doneButton;
     
-    // Tap gesture recognizer
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:view action:@selector(handleTapGestureRecognizer:)];
-    [view addGestureRecognizer:tap];
-    view.tapGestureRecognizer = tap;
-    
     return view;
 }
 
@@ -73,13 +80,20 @@
     [self dismissViewAnimated];
 }
 
+- (void)tweetView:(TWTRTweetView *)tweetView didTapURL:(NSURL *)url
+{
+    [self.delegate didTapOnDetailTweetViewURL:url];
+    [self dismissViewAnimated];
+}
+
 - (void) loadViewAnimatedOnView: (UIView *) superView
 {
     self.backgroundColor = [UIColor clearColor];
-    self.detailTweetView.alpha = 0;
+    self.tweetView.alpha = 0;
     self.doneButton.alpha = 0;
-    [self.detailTweetView setTransform:CGAffineTransformMakeScale(0.88, 0.88)];
+    [self.tweetView setTransform:CGAffineTransformMakeScale(0.88, 0.88)];
     [superView addSubview:self];
+    self.tweetView.delegate = self;
     
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -87,8 +101,8 @@
     } completion:nil];
     
     [UIView animateWithDuration:0.4 delay:0.08 usingSpringWithDamping:0.6 initialSpringVelocity:4 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        weakSelf.detailTweetView.alpha = 1;
-        [weakSelf.detailTweetView setTransform:CGAffineTransformIdentity];
+        weakSelf.tweetView.alpha = 1;
+        [weakSelf.tweetView setTransform:CGAffineTransformIdentity];
         weakSelf.doneButton.alpha = 1;
     } completion:nil];
 }

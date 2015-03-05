@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <TwitterKit/TwitterKit.h>
 
+@protocol TTDetailTweetViewDelegate <NSObject>
+- (void) didTapOnDetailTweetViewURL: (NSURL *) url;
+@end
+
 @interface TTDetailTweetView : UIView
-@property (nonatomic, strong) TWTRTweetView *detailTweetView;
+@property (nonatomic, strong) TWTRTweetView *tweetView;
+@property (nonatomic, weak) id<TTDetailTweetViewDelegate>delegate;
 + (TTDetailTweetView *) createNewDetailTweetViewWithTweet:(TWTRTweet *)tweet;
 - (void) loadViewAnimatedOnView: (UIView *) superView;
-
 @end

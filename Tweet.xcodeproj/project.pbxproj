@@ -25,6 +25,7 @@
 		09E9E4421AA8007F00059D29 /* TTDetailTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9E4411AA8007F00059D29 /* TTDetailTweetView.m */; };
 		09E9E4461AA8163100059D29 /* TTWarningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9E4451AA8163100059D29 /* TTWarningView.m */; };
 		09E9E4491AA816E500059D29 /* TTWarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09E9E4481AA816E500059D29 /* TTWarningView.xib */; };
+		09E9E44C1AA887F900059D29 /* TTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9E44B1AA887F900059D29 /* TTWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		09E9E4441AA8163100059D29 /* TTWarningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTWarningView.h; sourceTree = "<group>"; };
 		09E9E4451AA8163100059D29 /* TTWarningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTWarningView.m; sourceTree = "<group>"; };
 		09E9E4481AA816E500059D29 /* TTWarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TTWarningView.xib; sourceTree = "<group>"; };
+		09E9E44A1AA887F900059D29 /* TTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTWebViewController.h; sourceTree = "<group>"; };
+		09E9E44B1AA887F900059D29 /* TTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTWebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,7 @@
 				09C001921AA6BE5100EDB009 /* Login */,
 				09E9E4431AA8008600059D29 /* Detail View */,
 				09E9E4471AA8163500059D29 /* Warning View */,
+				09E9E44D1AA887FD00059D29 /* Web View Controller */,
 				09C001601AA6A9CC00EDB009 /* Supporting Files */,
 				09C0019E1AA77DC300EDB009 /* Assets */,
 			);
@@ -209,6 +213,15 @@
 				09E9E4481AA816E500059D29 /* TTWarningView.xib */,
 			);
 			name = "Warning View";
+			sourceTree = "<group>";
+		};
+		09E9E44D1AA887FD00059D29 /* Web View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				09E9E44A1AA887F900059D29 /* TTWebViewController.h */,
+				09E9E44B1AA887F900059D29 /* TTWebViewController.m */,
+			);
+			name = "Web View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,6 +347,7 @@
 			files = (
 				09C001911AA6B25900EDB009 /* TTLoginViewController.m in Sources */,
 				09C001981AA6C49900EDB009 /* TTLoginOnboardingView.m in Sources */,
+				09E9E44C1AA887F900059D29 /* TTWebViewController.m in Sources */,
 				09C001691AA6A9CC00EDB009 /* Tweet.xcdatamodeld in Sources */,
 				09E9E4461AA8163100059D29 /* TTWarningView.m in Sources */,
 				09E9E4421AA8007F00059D29 /* TTDetailTweetView.m in Sources */,
