@@ -29,7 +29,33 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    if ([[[Twitter sharedInstance]session]authToken] && self.localTweets) {
+    
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    if ([[[Twitter sharedInstance] session] authToken]) {
+        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+        TTMainViewController *mainViewController = [nav.viewControllers objectAtIndex:0];
+        if (mainViewController) {
+            [mainViewController downloadTweets];
+        }
+    }
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Saves changes in the application's managed object context before the application terminates.
+    [self saveContext];
+}
+
+- (void) saveTweets:(NSArray *)tweets
+{
+    if ([[[Twitter sharedInstance]session]authToken] && tweets) {
         // fetch entry from core data
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Tweets" inManagedObjectContext:self.managedObjectContext];
@@ -46,7 +72,7 @@
                 tweet = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext];
             }
             // update entry
-            [tweet setValue:self.localTweets forKey:@"data"];
+            [tweet setValue:tweets forKey:@"data"];
             NSError *saveError = nil;
             if (![tweet.managedObjectContext save:&saveError]) {
                 NSLog(@"Unable to save managed object context.");
@@ -54,27 +80,6 @@
             }
         }
     }
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    if ([[[Twitter sharedInstance] session]authToken]) {
-        UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
-        TTMainViewController *mainViewController = [nav.viewControllers objectAtIndex:0];
-        if (mainViewController) {
-            [mainViewController downloadTweets];
-        }
-    }
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
 }
 
 #pragma mark - Core Data stack

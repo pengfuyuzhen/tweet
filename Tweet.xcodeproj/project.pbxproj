@@ -22,6 +22,7 @@
 		09C001981AA6C49900EDB009 /* TTLoginOnboardingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C001971AA6C49900EDB009 /* TTLoginOnboardingView.m */; };
 		09C0019A1AA6C4A800EDB009 /* TTLoginOnboardingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09C001991AA6C4A800EDB009 /* TTLoginOnboardingView.xib */; };
 		09C0019D1AA77DBF00EDB009 /* twitter_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09C0019C1AA77DBF00EDB009 /* twitter_logo@2x.png */; };
+		09E9E4421AA8007F00059D29 /* TTDetailTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9E4411AA8007F00059D29 /* TTDetailTweetView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		09C001971AA6C49900EDB009 /* TTLoginOnboardingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTLoginOnboardingView.m; sourceTree = "<group>"; };
 		09C001991AA6C4A800EDB009 /* TTLoginOnboardingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TTLoginOnboardingView.xib; sourceTree = "<group>"; };
 		09C0019C1AA77DBF00EDB009 /* twitter_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_logo@2x.png"; sourceTree = "<group>"; };
+		09E9E4401AA8007F00059D29 /* TTDetailTweetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDetailTweetView.h; sourceTree = "<group>"; };
+		09E9E4411AA8007F00059D29 /* TTDetailTweetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDetailTweetView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,7 @@
 				09C001651AA6A9CC00EDB009 /* AppDelegate.m */,
 				09C001931AA6BE7400EDB009 /* TTMainViewController.h */,
 				09C001941AA6BE7400EDB009 /* TTMainViewController.m */,
+				09E9E4431AA8008600059D29 /* Detail View */,
 				09C001921AA6BE5100EDB009 /* Login */,
 				09C001901AA6ACB500EDB009 /* TwitterKit */,
 				09C001601AA6A9CC00EDB009 /* Supporting Files */,
@@ -179,6 +183,15 @@
 				09C0019C1AA77DBF00EDB009 /* twitter_logo@2x.png */,
 			);
 			name = Assets;
+			sourceTree = "<group>";
+		};
+		09E9E4431AA8008600059D29 /* Detail View */ = {
+			isa = PBXGroup;
+			children = (
+				09E9E4401AA8007F00059D29 /* TTDetailTweetView.h */,
+				09E9E4411AA8007F00059D29 /* TTDetailTweetView.m */,
+			);
+			name = "Detail View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +317,7 @@
 				09C001911AA6B25900EDB009 /* TTLoginViewController.m in Sources */,
 				09C001981AA6C49900EDB009 /* TTLoginOnboardingView.m in Sources */,
 				09C001691AA6A9CC00EDB009 /* Tweet.xcdatamodeld in Sources */,
+				09E9E4421AA8007F00059D29 /* TTDetailTweetView.m in Sources */,
 				09C001951AA6BE7400EDB009 /* TTMainViewController.m in Sources */,
 				09C001661AA6A9CC00EDB009 /* AppDelegate.m in Sources */,
 				09C001631AA6A9CC00EDB009 /* main.m in Sources */,
@@ -505,6 +519,7 @@
 				09C001851AA6A9CD00EDB009 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		09C001861AA6A9CD00EDB009 /* Build configuration list for PBXNativeTarget "TweetTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +528,7 @@
 				09C001881AA6A9CD00EDB009 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

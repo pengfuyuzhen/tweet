@@ -10,13 +10,13 @@
 #import <TwitterKit/TwitterKit.h>
 #import "TTLoginViewController.h"
 #import "AppDelegate.h"
+#import "TTDetailTweetView.h"
 
 static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 
 @interface TTMainViewController () <TTLoginViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, TWTRTweetViewDelegate>
 @property (nonatomic, strong) TTLoginViewController *loginViewController;
 @property (nonatomic, strong) NSArray *tweets;
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @end
 
 @implementation TTMainViewController
@@ -37,7 +37,7 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     
     // Create refresh control.
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.refreshControl.backgroundColor = [UIColor clearColor];
     self.refreshControl.tintColor = [UIColor lightGrayColor];
     [self.refreshControl addTarget:self
                             action:@selector(downloadTweets)
@@ -129,11 +129,14 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     __weak typeof(self) weakSelf = self;
     [[[Twitter sharedInstance] APIClient] loadTweetsWithIDs:IDs completion:^(NSArray *tweets, NSError *error) {
         if (tweets) {
+            if ([weakSelf.refreshControl isRefreshing]) {
+                [weakSelf.refreshControl endRefreshing];
+            }
             typeof(self) strongSelf = weakSelf;
             strongSelf.tweets = tweets;
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            appDelegate.localTweets = _tweets;
             [strongSelf.tableView reloadData];
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDelegate saveTweets:tweets];
         } else {
             NSLog(@"Failed to load tweet: %@", [error localizedDescription]);
             // TODO: show warning UI
@@ -159,6 +162,9 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
             [self.tableView reloadData];
         }
     }
+    if ([self.refreshControl isRefreshing]) {
+        [self.refreshControl endRefreshing];
+    }
 }
 
 # pragma mark - UITableViewDelegate Methods
@@ -179,6 +185,26 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     TWTRTweet *tweet = self.tweets[indexPath.row];
     return [TWTRTweetTableViewCell heightForTweet:tweet width:CGRectGetWidth(self.view.bounds)];
+}
+
+# pragma mark TweetViewDelegate methods
+
+- (void)tweetView:(TWTRTweetView *)tweetView didSelectTweet:(TWTRTweet *)tweet{
+    TTDetailTweetView *detailView = [TTDetailTweetView createNewDetailTweetViewWithTweet:tweet];
+    [detailView loadViewAnimatedOnView:self.navigationController.view];
+}
+
+- (void)tweetView:(TWTRTweetView *)tweetView didTapURL:(NSURL *)url {
+//    // Open your own custom webview
+//    MyWebViewController *webViewController = [MyWebViewController alloc] init];
+//    
+//    // *or* Use a system webview
+//    UIViewController *webViewController = [[UIViewController alloc] init];
+//    UIWebView *webView = [[UIWebView alloc] initWithFrame:webViewController.view.bounds];
+//    [webView loadRequest:[NSURLRequest requestWithURL:url]];
+//    webViewController.view = webView;
+//    
+//    [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

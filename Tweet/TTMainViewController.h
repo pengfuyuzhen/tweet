@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TTMainViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface TTMainViewController : UITableViewController
 - (void) downloadTweets;
 @end
