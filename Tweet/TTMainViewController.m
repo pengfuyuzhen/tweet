@@ -207,16 +207,14 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 }
 
 - (void)tweetView:(TWTRTweetView *)tweetView didTapURL:(NSURL *)url {
-//    // Open your own custom webview
-//    MyWebViewController *webViewController = [MyWebViewController alloc] init];
-//    
-//    // *or* Use a system webview
-//    UIViewController *webViewController = [[UIViewController alloc] init];
-//    UIWebView *webView = [[UIWebView alloc] initWithFrame:webViewController.view.bounds];
-//    [webView loadRequest:[NSURLRequest requestWithURL:url]];
-//    webViewController.view = webView;
-//    
-//    [self.navigationController pushViewController:webViewController animated:YES];
+    
+    // *or* Use a system webview
+    UIViewController *webViewController = [[UIViewController alloc] init];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:webViewController.view.bounds];
+    [webView loadRequest:[NSURLRequest requestWithURL:url]];
+    webViewController.view = webView;
+    
+    [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
