@@ -21,11 +21,11 @@
 		09C001951AA6BE7400EDB009 /* TTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C001941AA6BE7400EDB009 /* TTMainViewController.m */; };
 		09C001981AA6C49900EDB009 /* TTLoginOnboardingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C001971AA6C49900EDB009 /* TTLoginOnboardingView.m */; };
 		09C0019A1AA6C4A800EDB009 /* TTLoginOnboardingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09C001991AA6C4A800EDB009 /* TTLoginOnboardingView.xib */; };
-		09C0019D1AA77DBF00EDB009 /* twitter_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09C0019C1AA77DBF00EDB009 /* twitter_logo@2x.png */; };
 		09E9E4421AA8007F00059D29 /* TTDetailTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9E4411AA8007F00059D29 /* TTDetailTweetView.m */; };
 		09E9E4461AA8163100059D29 /* TTWarningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9E4451AA8163100059D29 /* TTWarningView.m */; };
 		09E9E4491AA816E500059D29 /* TTWarningView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09E9E4481AA816E500059D29 /* TTWarningView.xib */; };
 		09E9E44C1AA887F900059D29 /* TTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E9E44B1AA887F900059D29 /* TTWebViewController.m */; };
+		09E9E44F1AA8A34D00059D29 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E9E44E1AA8A34D00059D29 /* icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +61,6 @@
 		09C001961AA6C49900EDB009 /* TTLoginOnboardingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTLoginOnboardingView.h; sourceTree = "<group>"; };
 		09C001971AA6C49900EDB009 /* TTLoginOnboardingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTLoginOnboardingView.m; sourceTree = "<group>"; };
 		09C001991AA6C4A800EDB009 /* TTLoginOnboardingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TTLoginOnboardingView.xib; sourceTree = "<group>"; };
-		09C0019C1AA77DBF00EDB009 /* twitter_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter_logo@2x.png"; sourceTree = "<group>"; };
 		09E9E4401AA8007F00059D29 /* TTDetailTweetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDetailTweetView.h; sourceTree = "<group>"; };
 		09E9E4411AA8007F00059D29 /* TTDetailTweetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDetailTweetView.m; sourceTree = "<group>"; };
 		09E9E4441AA8163100059D29 /* TTWarningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTWarningView.h; sourceTree = "<group>"; };
@@ -69,6 +68,7 @@
 		09E9E4481AA816E500059D29 /* TTWarningView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TTWarningView.xib; sourceTree = "<group>"; };
 		09E9E44A1AA887F900059D29 /* TTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTWebViewController.h; sourceTree = "<group>"; };
 		09E9E44B1AA887F900059D29 /* TTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTWebViewController.m; sourceTree = "<group>"; };
+		09E9E44E1AA8A34D00059D29 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +191,7 @@
 		09C0019E1AA77DC300EDB009 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				09C0019C1AA77DBF00EDB009 /* twitter_logo@2x.png */,
+				09E9E44E1AA8A34D00059D29 /* icon@2x.png */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -305,9 +305,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09E9E44F1AA8A34D00059D29 /* icon@2x.png in Resources */,
 				09C0018E1AA6AB8000EDB009 /* TwitterKitResources.bundle in Resources */,
 				09C0016F1AA6A9CC00EDB009 /* Main.storyboard in Resources */,
-				09C0019D1AA77DBF00EDB009 /* twitter_logo@2x.png in Resources */,
 				09C001741AA6A9CC00EDB009 /* LaunchScreen.xib in Resources */,
 				09C001711AA6A9CC00EDB009 /* Images.xcassets in Resources */,
 				09E9E4491AA816E500059D29 /* TTWarningView.xib in Resources */,
