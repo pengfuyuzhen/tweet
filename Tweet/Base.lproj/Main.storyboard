@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i3y-vY-beX">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="IUF-eC-h8b">
+            <objects>
+                <viewController id="YLK-wi-OJC" customClass="TTMainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pRf-Vu-Si3"/>
+                        <viewControllerLayoutGuide type="bottom" id="FgT-Rj-PeJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dBB-Co-e6X">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="usU-RV-Jd2">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="YLK-wi-OJC" id="jIv-wr-Aw2"/>
+                                    <outlet property="delegate" destination="YLK-wi-OJC" id="i8P-Uq-MvS"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="usU-RV-Jd2" secondAttribute="centerX" id="SFi-6y-9tB"/>
+                            <constraint firstAttribute="centerY" secondItem="usU-RV-Jd2" secondAttribute="centerY" id="Xvn-TW-VUb"/>
+                            <constraint firstItem="usU-RV-Jd2" firstAttribute="leading" secondItem="dBB-Co-e6X" secondAttribute="leading" id="vbR-C6-KXJ"/>
+                            <constraint firstItem="usU-RV-Jd2" firstAttribute="top" secondItem="dBB-Co-e6X" secondAttribute="top" id="wly-4L-cA1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="8BW-rs-7U6">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="WlB-Tf-Brn">
+                            <color key="tintColor" red="0.25098039220000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="composeButtonPressed:" destination="YLK-wi-OJC" id="6dY-FP-wAH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="usU-RV-Jd2" id="cIm-O7-c2R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tdu-wL-Emp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="122" y="320"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController storyboardIdentifier="TTLoginViewController" id="vXZ-lx-hvc" customClass="TTLoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vkq-yi-WRc">
+                                <rect key="frame" x="60" y="164" width="200" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3FZ-Xr-IBU"/>
+                                    <constraint firstAttribute="width" constant="200" id="s6q-dD-im5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="38"/>
+                                <color key="textColor" red="0.25098039215686274" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet requires that you have a Twitter account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIC-oT-FPv">
+                                <rect key="frame" x="49" y="386" width="223" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="gRD-HZ-rB8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Same as twitter, but crappier" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mK5-Eo-d3d">
+                                <rect key="frame" x="60" y="206" width="200" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="cGP-mH-Tol"/>
+                                    <constraint firstAttribute="height" constant="20" id="cyW-Fi-EQb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="0.25098039215686274" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Gm-NW-lBb">
+                                <rect key="frame" x="0.0" y="342" width="320" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="5vQ-rU-Zmg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="9Gm-NW-lBb" secondAttribute="centerY" constant="-80" id="3rz-aj-xoZ"/>
+                            <constraint firstAttribute="centerX" secondItem="9Gm-NW-lBb" secondAttribute="centerX" id="BLY-Cd-VEW"/>
+                            <constraint firstAttribute="centerX" secondItem="VIC-oT-FPv" secondAttribute="centerX" id="GaA-3D-6ik"/>
+                            <constraint firstAttribute="centerY" secondItem="Vkq-yi-WRc" secondAttribute="centerY" constant="100" id="JbK-Zc-RYJ"/>
+                            <constraint firstItem="9Gm-NW-lBb" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="NMR-1e-glz"/>
+                            <constraint firstItem="VIC-oT-FPv" firstAttribute="top" secondItem="9Gm-NW-lBb" secondAttribute="bottom" id="Qv8-X8-18W"/>
+                            <constraint firstAttribute="centerX" secondItem="Vkq-yi-WRc" secondAttribute="centerX" id="U1E-Nr-JkM"/>
+                            <constraint firstAttribute="centerX" secondItem="mK5-Eo-d3d" secondAttribute="centerX" id="UOZ-1r-zfX"/>
+                            <constraint firstItem="mK5-Eo-d3d" firstAttribute="top" secondItem="Vkq-yi-WRc" secondAttribute="bottom" constant="2" id="Ufv-vP-clU"/>
+                            <constraint firstItem="VIC-oT-FPv" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="49" id="if6-xW-bRZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loginButtonContainerView" destination="9Gm-NW-lBb" id="MUK-1o-YWL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="534" y="320"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7B2-QH-jEK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i3y-vY-beX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yyp-tg-qca">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YLK-wi-OJC" kind="relationship" relationship="rootViewController" id="mqY-qa-VaE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M3F-xi-Hb4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-292" y="320"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
