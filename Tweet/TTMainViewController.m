@@ -11,6 +11,7 @@
 #import "TTLoginViewController.h"
 #import "AppDelegate.h"
 #import "TTDetailTweetView.h"
+#import "TTWarningView.h"
 
 static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 
@@ -26,7 +27,7 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     [super viewDidLoad];
     
     // Style the nav bar title
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"twitter_logo"]];
+    self.navigationItem.title = @"Timeline";
     
     // Setup tableview
     self.tableView.estimatedRowHeight = 150;
@@ -42,6 +43,11 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     [self.refreshControl addTarget:self
                             action:@selector(downloadTweets)
                   forControlEvents:UIControlEventValueChanged];
+    
+    // Load saved tweets first
+    if ([[[Twitter sharedInstance]session]authToken]) {
+        [self loadSavedTweets];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -55,6 +61,12 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
     }
 }
 
+- (void) showWarningViewWithTitle: (NSString *) title
+{
+    TTWarningView *warningView = [TTWarningView createNewWarningViewWithTitle:title];
+    [warningView showOnView:self.navigationController.view];
+}
+
 #pragma mark TTLoginViewController delegate methods
 
 - (void) loggedIn {
@@ -64,13 +76,13 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 #pragma mark Compose Tweets
 
 - (IBAction)composeButtonPressed:(id)sender {
+    
+    __weak typeof(self) weakSelf = self;
     TWTRComposer *composer = [[TWTRComposer alloc] init];
     [composer showWithCompletion:^(TWTRComposerResult result) {
         if (result == TWTRComposerResultDone) {
             NSLog(@"Sending Tweet!");
-            
-            // TODO:
-            // reload tweets
+            [weakSelf performSelector:@selector(downloadTweets) withObject:nil afterDelay:1.5];
         }
     }];
 }
@@ -111,15 +123,15 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
                  [weakSelf loadTweetsWithIDs:IDs];
              }
              else {
-                 NSLog(@"Error: %@", connectionError);
-                 // TODO: show warning UI
+                 NSLog(@"Connection Failed: %@", connectionError);
+                 [self showWarningViewWithTitle:@"No internet connection"];
                  [weakSelf loadSavedTweets];
              }
          }];
     }
     else {
-        NSLog(@"Error: %@", clientError);
-        // TODO: show warning UI
+        NSLog(@"Client Error: %@", clientError);
+        [self showWarningViewWithTitle:@"Error getting tweets from Twitter"];
         [weakSelf loadSavedTweets];
     }
 }
@@ -139,7 +151,7 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
             [appDelegate saveTweets:tweets];
         } else {
             NSLog(@"Failed to load tweet: %@", [error localizedDescription]);
-            // TODO: show warning UI
+            [self showWarningViewWithTitle:@"Error displaying tweets"];
             [weakSelf loadSavedTweets];
         }
     }];

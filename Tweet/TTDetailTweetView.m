@@ -8,8 +8,12 @@
 
 #import "TTDetailTweetView.h"
 
-@implementation TTDetailTweetView
+@interface TTDetailTweetView()
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
+@property (nonatomic, strong) UIButton *doneButton;
+@end
 
+@implementation TTDetailTweetView
 
 + (TTDetailTweetView *) createNewDetailTweetViewWithTweet:(TWTRTweet *)tweet
 {
@@ -22,12 +26,14 @@
     
     // Gradient view
     NSArray *colors = @[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.6].CGColor,
+                        (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor,
                         (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4].CGColor,
+                        (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.3].CGColor,
                         (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2].CGColor,
                         (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.1].CGColor,
                         (id)[UIColor clearColor].CGColor];
     
-    NSArray *locations = @[@0, @0.2, @0.4, @0.6, @0.9];
+    NSArray *locations = @[@0, @0.1, @0.2, @0.3, @0.4, @0.6, @0.9];
     
     CAGradientLayer *topGradientLayer = [CAGradientLayer layer];
     topGradientLayer.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 200);
@@ -42,40 +48,57 @@
     
     // Done button
     UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [doneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [doneButton setTitleColor:[UIColor groupTableViewBackgroundColor] forState:UIControlStateNormal];
     [doneButton setTitle:@"Done" forState:UIControlStateNormal];
     doneButton.layer.cornerRadius = 4.0;
     doneButton.layer.borderWidth = 1.0;
-    doneButton.layer.borderColor = [[UIColor whiteColor]CGColor];
+    doneButton.layer.borderColor = [[UIColor groupTableViewBackgroundColor]CGColor];
     doneButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-medium" size:13];
     doneButton.frame = CGRectMake(0, 0, 56, 28);
     doneButton.center = CGPointMake(CGRectGetWidth([[UIScreen mainScreen]bounds]) - 15 - CGRectGetWidth(doneButton.frame)/2.0, CGRectGetHeight(doneButton.frame) + 12);
     [doneButton addTarget:view action:@selector(doneButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:doneButton];
+    view.doneButton = doneButton;
+    
+    // Tap gesture recognizer
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:view action:@selector(handleTapGestureRecognizer:)];
+    [view addGestureRecognizer:tap];
+    view.tapGestureRecognizer = tap;
     
     return view;
+}
+
+- (void) handleTapGestureRecognizer: (UITapGestureRecognizer *) sender
+{
+    [self dismissViewAnimated];
 }
 
 - (void) loadViewAnimatedOnView: (UIView *) superView
 {
     self.backgroundColor = [UIColor clearColor];
     self.detailTweetView.alpha = 0;
-    [self.detailTweetView setTransform:CGAffineTransformMakeScale(0.85, 0.85)];
+    self.doneButton.alpha = 0;
+    [self.detailTweetView setTransform:CGAffineTransformMakeScale(0.88, 0.88)];
     [superView addSubview:self];
     
     __weak typeof(self) weakSelf = self;
-
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         weakSelf.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.85];
     } completion:nil];
     
-    [UIView animateWithDuration:0.4 delay:0.08 usingSpringWithDamping:0.7 initialSpringVelocity:4 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.4 delay:0.08 usingSpringWithDamping:0.6 initialSpringVelocity:4 options:UIViewAnimationOptionCurveEaseOut animations:^{
         weakSelf.detailTweetView.alpha = 1;
         [weakSelf.detailTweetView setTransform:CGAffineTransformIdentity];
+        weakSelf.doneButton.alpha = 1;
     } completion:nil];
 }
 
 - (void) doneButtonPressed
+{
+    [self dismissViewAnimated];
+}
+
+- (void) dismissViewAnimated
 {
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
