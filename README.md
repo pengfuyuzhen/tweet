@@ -1,2 +1,2 @@
 # tweet
-Tweet is a sample app that allows you to view your timeline of Twitter, as well as post tweets.
+Tweet uses TwitterKit to allow users to view, share and post tweets within the app. 
